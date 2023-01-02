@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:matrimony/loginscreen.dart';
 
 class PreLoginPage extends StatelessWidget {
   const PreLoginPage({super.key});
@@ -17,6 +18,9 @@ class PreLoginPage extends StatelessWidget {
                   Image.asset(
                     "assets/images/bg_matrimony_prelogin.jpg",
                     fit: BoxFit.fitHeight,
+                  ),
+                  Container(
+                    color: Color(0x99ffffff),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 75),
@@ -57,10 +61,9 @@ class PreLoginPage extends StatelessWidget {
                         wordSpacing: 1,
                         fontWeight: FontWeight.w900,
                         height: 1.0,
-                        decoration: TextDecoration.combine([
-                          TextDecoration.overline,
-                          TextDecoration.underline
-                        ]),
+                        decoration: TextDecoration.combine(
+                          [TextDecoration.overline, TextDecoration.underline],
+                        ),
                       ),
                     ),
                   ),
@@ -73,7 +76,10 @@ class PreLoginPage extends StatelessWidget {
                   child: Container(
                     color: Color.fromARGB(255, 142, 196, 74),
                     child: TextButton(
-                      onPressed: null,
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => LoginScreen()));
+                      },
                       child: Text(
                         "Login",
                         style: TextStyle(color: Colors.white),
