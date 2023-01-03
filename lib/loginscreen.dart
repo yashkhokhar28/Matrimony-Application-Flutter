@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:matrimony/homescreen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -12,6 +11,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool pass = true;
   bool? check2 = true, check3 = false;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -24,9 +24,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Image.asset(
                     "assets/images/bg_matrimony_prelogin.jpg",
-                    fit: BoxFit.fitHeight,
+                    fit: BoxFit.cover,
                   ),
-                  Container(color: Color(0x99ffffff),),
+                  Container(
+                    color: Color(0x99000000),
+                  ),
                   Container(
                     margin: EdgeInsets.only(top: 100),
                     child: Column(
@@ -61,8 +63,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             Text(
                               "Email",
                               style: GoogleFonts.openSans(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w900,
                                 fontSize: 20,
                               ),
                             ),
@@ -72,17 +74,17 @@ class _LoginScreenState extends State<LoginScreen> {
                             Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: Colors.black),
+                                  color: Colors.white54),
                               child: TextField(
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: Colors.black),
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   prefixIcon: Icon(
                                     Icons.email_outlined,
-                                    color: Colors.white,
+                                    color: Colors.black,
                                   ),
                                   hintText: "Email",
-                                  hintStyle: TextStyle(color: Colors.white),
+                                  hintStyle: TextStyle(color: Colors.black),
                                 ),
                               ),
                             ),
@@ -90,8 +92,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             Text(
                               "Password",
                               style: GoogleFonts.openSans(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w900,
                                 fontSize: 20,
                               ),
                             ),
@@ -101,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: Colors.black),
+                                  color: Colors.white54),
                               child: TextField(
                                 obscureText: pass,
                                 style: TextStyle(color: Colors.white),
@@ -121,11 +123,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                         pass == true
                                             ? Icons.remove_red_eye
                                             : Icons.password,
-                                        color: Colors.white,
+                                        color: Colors.black,
                                       ),
                                     ),
                                     hintText: "Password",
-                                    hintStyle: TextStyle(color: Colors.white)),
+                                    hintStyle: TextStyle(color: Colors.black)),
                               ),
                             ),
                             SizedBox(
@@ -135,42 +137,45 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: Column(
                                 children: [
                                   CheckboxListTile(
-                                    activeColor: Colors.black,
+                                    activeColor: Colors.white54,
                                     value: check2,
                                     controlAffinity:
-                                    ListTileControlAffinity.leading,
+                                        ListTileControlAffinity.leading,
                                     onChanged: (bool? value) {
                                       setState(() {
                                         check2 = value;
                                       });
                                     },
-                                    title: Text("Remember Me"),
+                                    title: Text(
+                                      "Remember Me",
+                                      style: GoogleFonts.openSans(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w900,
+                                        color: Colors.white,
+                                        wordSpacing: 5,
+                                      ),
+                                    ),
                                   )
                                 ],
                               ),
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                color: Colors.black,
+                                color: Colors.white54,
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Center(
                                 child: Padding(
                                   padding: const EdgeInsets.all(4.0),
                                   child: TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) => HomePage(),
-                                        ),
-                                      );
-                                    },
+                                    onPressed: null,
                                     child: Text(
                                       "Login",
                                       style: GoogleFonts.openSans(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20,
-                                          color: Colors.white),
+                                        fontWeight: FontWeight.w900,
+                                        fontSize: 20,
+                                        color: Colors.black,
+                                      ),
                                     ),
                                   ),
                                 ),
