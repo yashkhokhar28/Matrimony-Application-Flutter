@@ -27,7 +27,7 @@ class PreLoginPage extends StatelessWidget {
                       color: Color(0x99ffffff),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 75),
+                      margin: EdgeInsets.only(top: 65),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisSize: MainAxisSize.max,

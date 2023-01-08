@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:matrimony/signupscreen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,185 +12,274 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool pass = true;
   bool? check2 = true, check3 = false;
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            Expanded(
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  Image.asset(
-                    "assets/images/bg_matrimony_prelogin.jpg",
-                    fit: BoxFit.cover,
+        body: SingleChildScrollView(
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 30, left: 25),
+                  child: Container(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Welcome Back!",
+                      style: GoogleFonts.openSans(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
                   ),
-                  Container(
-                    color: Color(0x99000000),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20, left: 25),
+                  child: Container(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Use your credentials below and login to your account",
+                      style: GoogleFonts.openSans(
+                          fontWeight: FontWeight.w600, fontSize: 12),
+                    ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 100),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Image.asset(
-                            "assets/images/bharatmatrimony-logo.png",
-                            alignment: Alignment.topCenter,
-                            width: 220,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Container(
+                    decoration: BoxDecoration(),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value != null && value.isEmpty) {
+                          return "Enter User Name";
+                        }
+                      },
+                      controller: userNameController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Email address",
+                        labelStyle:
+                            GoogleFonts.openSans(fontWeight: FontWeight.bold),
+                        hintStyle: TextStyle(color: Colors.black),
+                        suffixIcon: Icon(Icons.check_circle_outline),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                    child: TextFormField(
+                      controller: passwordController,
+                      validator: (value) {
+                        if (value != null &&
+                            value.isEmpty &&
+                            value.length > 5) {
+                          return "Enter Password";
+                        }
+                      },
+                      obscureText: pass,
+                      obscuringCharacter: "*",
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Password",
+                        labelStyle:
+                            GoogleFonts.openSans(fontWeight: FontWeight.bold),
+                        hintStyle: TextStyle(color: Colors.black),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              if (pass) {
+                                pass = false;
+                              } else {
+                                pass = true;
+                              }
+                            });
+                          },
+                          icon: Icon(
+                            pass == true
+                                ? Icons.remove_red_eye
+                                : Icons.password,
+                            color: Colors.black,
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 250),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
                       ),
                     ),
-                    child: Padding(
-                      padding: EdgeInsets.all(20),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Email",
-                              style: GoogleFonts.openSans(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w900,
-                                fontSize: 20,
-                              ),
+                  ),
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        child: CheckboxListTile(
+                          title: Text(
+                            "Remember me",
+                            style: GoogleFonts.openSans(
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                          value: check2,
+                          controlAffinity: ListTileControlAffinity.leading,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              check2 = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        child: TextButton(
+                          onPressed: null,
+                          child: Text(
+                            "Forgot Password?",
+                            style: GoogleFonts.openSans(
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+                                fontSize: 12),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black),
+                      color: Color.fromARGB(255, 142, 196, 74),
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (builder) => SignUpPage(),
                             ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white54),
-                              child: TextField(
-                                style: TextStyle(color: Colors.black),
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  prefixIcon: Icon(
-                                    Icons.email_outlined,
-                                    color: Colors.black,
-                                  ),
-                                  hintText: "Email",
-                                  hintStyle: TextStyle(color: Colors.black),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 15),
-                            Text(
-                              "Password",
-                              style: GoogleFonts.openSans(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w900,
-                                fontSize: 20,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white54),
-                              child: TextField(
-                                obscureText: pass,
-                                style: TextStyle(color: Colors.white),
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    prefixIcon: IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          if (pass) {
-                                            pass = false;
-                                          } else {
-                                            pass = true;
-                                          }
-                                        });
-                                      },
-                                      icon: Icon(
-                                        pass == true
-                                            ? Icons.remove_red_eye
-                                            : Icons.password,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    hintText: "Password",
-                                    hintStyle: TextStyle(color: Colors.black)),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              child: Column(
-                                children: [
-                                  CheckboxListTile(
-                                    activeColor: Colors.white54,
-                                    value: check2,
-                                    controlAffinity:
-                                        ListTileControlAffinity.leading,
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        check2 = value;
-                                      });
-                                    },
-                                    title: Text(
-                                      "Remember Me",
-                                      style: GoogleFonts.openSans(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w900,
-                                        color: Colors.white,
-                                        wordSpacing: 5,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white54,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: TextButton(
-                                    onPressed: null,
-                                    child: Text(
-                                      "Login",
-                                      style: GoogleFonts.openSans(
-                                        fontWeight: FontWeight.w900,
-                                        fontSize: 20,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
+                          );
+                        }
+                      },
+                      child: Text(
+                        "Login my account",
+                        style: GoogleFonts.openSans(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ),
-                ],
-              ),
-            )
-          ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: Center(
+                    child: Text(
+                      "Or Login With",
+                      style: GoogleFonts.openSans(
+                          fontWeight: FontWeight.bold, fontSize: 15),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black),
+                      color: Color.fromARGB(255, 48, 48, 48),
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (builder) => SignUpPage(),
+                          ),
+                        );
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.g_mobiledata_rounded,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Continue with Google",
+                            style: GoogleFonts.openSans(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black),
+                      color: Color.fromARGB(255, 48, 48, 48),
+                      // rgba(255,212,183,255)
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (builder) => SignUpPage(),
+                          ),
+                        );
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.facebook,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Continue with Facebook",
+                            style: GoogleFonts.openSans(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 40),
+                  child: Container(
+                    alignment: Alignment.bottomCenter,
+                    child: Text(
+                      "by Continuing,you accept our Terms and \n Condition,Privacy Policy",
+                      style: GoogleFonts.openSans(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
