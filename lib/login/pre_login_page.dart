@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:matrimony/exit-popup.dart';
-import 'package:matrimony/loginscreen.dart';
-import 'package:matrimony/signupscreen.dart';
+import 'package:matrimony/exit/exit-popup.dart';
+import 'package:matrimony/login/loginscreen.dart';
+import 'package:matrimony/login/signupscreen.dart';
 
 class PreLoginPage extends StatelessWidget {
   const PreLoginPage({super.key});

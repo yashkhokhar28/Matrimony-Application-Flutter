@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:matrimony/signupscreen.dart';
+import 'package:matrimony/login/signupscreen.dart';
+import 'package:matrimony/matrimony/user_list_page.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -78,8 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       controller: passwordController,
                       validator: (value) {
                         if (value != null &&
-                            value.isEmpty &&
-                            value.length > 5) {
+                            value.isEmpty) {
                           return "Enter Password";
                         }
                       },
@@ -161,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         if (formKey.currentState!.validate()) {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (builder) => SignUpPage(),
+                              builder: (builder) => UserListPage(),
                             ),
                           );
                         }
@@ -198,7 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (builder) => SignUpPage(),
+                            builder: (builder) => UserListPage(),
                           ),
                         );
                       },
@@ -237,7 +237,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (builder) => SignUpPage(),
+                            builder: (builder) => UserListPage(),
                           ),
                         );
                       },

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:matrimony/pre_login_page.dart';
+import 'package:matrimony/login/pre_login_page.dart';
 
 void main() {
   runApp(const MyApp());
