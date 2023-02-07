@@ -44,7 +44,7 @@ class _AddUserState extends State<AddUser> {
               getDateTime(),
             ),
           ),
-          Container(
+          SizedBox(
             width: double.infinity,
             child: FutureBuilder<List<CityModel>>(
               builder: (context, snapshot) {
