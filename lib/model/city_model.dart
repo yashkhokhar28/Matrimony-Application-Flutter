@@ -1,23 +1,24 @@
 class CityModel {
-  late int _CityID;
-  late String _CityName;
-  late int _StateID;
+  late int CityID1;
+  late String CityName1;
+  late int StateID1;
 
-  int get CityID => _CityID;
+  CityModel({required this.CityID1,required this.CityName1,required this.StateID1});
+  int get CityID => CityID1;
 
   set CityID(int value) {
-    _CityID = value;
+    CityID1 = value;
   }
 
-  String get CityName => _CityName;
+  String get CityName => CityName1;
 
   set CityName(String value) {
-    _CityName = value;
+    CityName1 = value;
   }
 
-  int get StateID => _StateID;
+  int get StateID => StateID1;
 
   set StateID(int value) {
-    _StateID = value;
+    StateID1 = value;
   }
 }

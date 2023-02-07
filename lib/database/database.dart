@@ -34,14 +34,13 @@ class MyDatabase {
     Database db = await initDatabase();
     List<Map<String, Object?>> data =
         await db.rawQuery("Select * from Mst_City");
-    CityModel model = CityModel();
-    model.CityID = -1;
-    model.CityName = "Select City";
+    CityModel model = CityModel(CityID1: -1, CityName1: "Select City", StateID1: -1);
+    cityList.add(model);
     for (int i = 0; i < data.length; i++) {
-      model = CityModel();
-      model.CityID = data[i]["CityID"] as int;
-      model.CityName = data[i]["CityName"].toString();
-      model.StateID = data[i]["StateID"] as int;
+      model = CityModel(
+          CityID1: data[i]["CityID"] as int,
+          CityName1: data[i]["CityName"].toString(),
+          StateID1: data[i]["StateID"] as int);
       cityList.add(model);
     }
     // print("data length : ${data.length}");
