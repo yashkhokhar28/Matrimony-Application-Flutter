@@ -38,7 +38,6 @@ class _AddUserState extends State<AddUser> {
           TextFormField(),
           InkWell(
             onTap: () {
-
             },
             child: Text(
               getDateTime(),
