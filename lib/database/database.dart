@@ -79,6 +79,16 @@ class MyDatabase {
     }
     return userList;
   }
+
+  Future<int> deleteUserFromUserTable(userID) async {
+    Database db = await initDatabase();
+    int deletedid = await db.delete(
+      'Tbl_User',
+      where: 'UserID = ?',
+      whereArgs: [userID],
+    );
+    return deletedid;
+  }
 }
 
 // Future<List<Map<String, Object?>>>
