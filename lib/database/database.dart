@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:matrimony/model/user_model.dart';
 import 'package:path/path.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
@@ -29,12 +30,28 @@ class MyDatabase {
     }
   }
 
+  Future<void> upsertIntoUserTable({cityID, userName, dob, userID}) async {
+    Database db = await initDatabase();
+    Map<String, Object> map = Map();
+    map["Name"] = userName;
+    map["DOB"] = dob;
+    map["CityID"] = cityID;
+    if (userID != -1) {
+      map["UserID"] = userID;
+      await db
+          .update("Tbl_User", map, where: "UserID = ?", whereArgs: [userID]);
+    } else {
+      await db.insert("Tbl_User", map);
+    }
+  }
+
   Future<List<CityModel>> getCityListFromTable() async {
     List<CityModel> cityList = [];
     Database db = await initDatabase();
     List<Map<String, Object?>> data =
         await db.rawQuery("Select * from Mst_City");
-    CityModel model = CityModel(CityID1: -1, CityName1: "Select City", StateID1: -1);
+    CityModel model =
+        CityModel(CityID1: -1, CityName1: "Select City", StateID1: -1);
     cityList.add(model);
     for (int i = 0; i < data.length; i++) {
       model = CityModel(
@@ -45,6 +62,22 @@ class MyDatabase {
     }
     // print("data length : ${data.length}");
     return cityList;
+  }
+
+  Future<List<UserModel>> getUserListFromTable() async {
+    List<UserModel> userList = [];
+    Database db = await initDatabase();
+    List<Map<String, Object?>> data =
+        await db.rawQuery("Select * from Tbl_User ");
+    for (int i = 0; i < data.length; i++) {
+      UserModel model = UserModel();
+      model.CityID = data[i]["CityID"] as int;
+      model.UserID = data[i]["UserID"] as int;
+      model.Name = data[i]["Name"].toString();
+      model.DOB = data[i]["DOB"].toString();
+      userList.add(model);
+    }
+    return userList;
   }
 }
 

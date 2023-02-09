@@ -32,6 +32,15 @@ dependencies:
   flutter:
     sdk: flutter
   email_validator: ^2.1.16
+  dropdown_button2: ^1.9.2
+  sqflite: ^2.2.4+1
+  path_provider: ^2.0.12
+  flutter_dropdown: ^1.0.1+hotfix.1
+  intl: ^0.17.0
+  http: ^0.13.5
+  retrofit: '>=3.0.0 <4.0.0'
+  logger: any
+  dropdown_cupertino: ^0.0.8
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -40,13 +49,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  sqflite: ^2.2.4+1
-  path_provider: ^2.0.12
-  dropdown_button2: ^1.9.2
-  intl: ^0.17.0
-  http: ^0.13.5
-  retrofit: '>=3.0.0 <4.0.0'
-  logger: any
+
 
 
 
