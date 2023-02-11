@@ -20,6 +20,11 @@ class _UserListPageState extends State<UserListPage> {
 
   @override
   void initState() {
+    MyDatabase().copyPasteAssetFileToRoot().then(
+      (value) {
+        MyDatabase().getUserListFromTable();
+      },
+    );
     super.initState();
   }
 
@@ -41,6 +46,7 @@ class _UserListPageState extends State<UserListPage> {
         ],
         backgroundColor: Color.fromARGB(255, 142, 196, 74),
         title: Text("User List"),
+        centerTitle: true,
       ),
       body: Container(
         color: Colors.white,
@@ -116,15 +122,15 @@ class _UserListPageState extends State<UserListPage> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                snapshot.data![index]
-                                                    .Name
+                                                snapshot.data![index].Name
                                                     .toString(),
                                                 style: GoogleFonts.openSans(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 15),
                                               ),
                                               Text(
-                                                snapshot.data![index].DOB.toString(),
+                                                snapshot.data![index].DOB
+                                                    .toString(),
                                                 style: GoogleFonts.openSans(
                                                     // fontWeight: FontWeight.bold,
                                                     fontSize: 12),
@@ -132,6 +138,21 @@ class _UserListPageState extends State<UserListPage> {
                                             ],
                                           ),
                                         ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            searchList[index].isFavouriteUser =
+                                                !searchList[index]
+                                                    .isFavouriteUser;
+                                          });
+                                        },
+                                        child: Icon(
+                                            searchList[index].isFavouriteUser
+                                                ? Icons.favorite
+                                                : Icons.favorite_border,
+                                            color: Colors.red.shade400,
+                                            size: 24),
                                       ),
                                       IconButton(
                                         onPressed: null,
@@ -160,7 +181,7 @@ class _UserListPageState extends State<UserListPage> {
               );
             }
           },
-          future: isGetData?MyDatabase().getUserListFromTable():null,
+          future: isGetData ? MyDatabase().getUserListFromTable() : null,
         ),
       ),
     );
@@ -171,7 +192,7 @@ class _UserListPageState extends State<UserListPage> {
       child: Text("Yes"),
       onPressed: () async {
         int deletedUserID =
-        await db.deleteUserFromUserTable(localList[index].UserID);
+            await db.deleteUserFromUserTable(localList[index].UserID);
         if (deletedUserID > 0) {
           localList.removeAt(index);
         }

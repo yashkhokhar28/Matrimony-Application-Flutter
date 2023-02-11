@@ -3,7 +3,13 @@ class UserModel{
   late String _Name;
   late String _DOB;
   late int _CityID;
+  late bool _isFavouriteUser;
 
+  bool get isFavouriteUser => _isFavouriteUser;
+
+  set isFavouriteUser(bool isFavouriteUser) {
+    _isFavouriteUser = isFavouriteUser;
+  }
 
   int get UserID => _UserID;
 

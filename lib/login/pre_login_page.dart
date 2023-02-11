@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:matrimony/api/api_demo.dart';
 import 'package:matrimony/exit/exit-popup.dart';
 import 'package:matrimony/login/loginscreen.dart';
 import 'package:matrimony/login/signupscreen.dart';
@@ -97,7 +98,7 @@ class PreLoginPage extends StatelessWidget {
                       child: TextButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => SignUpPage()));
+                              builder: (context) => ApiDemo()));
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.min,

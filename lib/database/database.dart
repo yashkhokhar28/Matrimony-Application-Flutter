@@ -37,7 +37,7 @@ class MyDatabase {
     map["DOB"] = dob;
     map["CityID"] = cityID;
     if (userID != -1) {
-      map["UserID"] = userID;
+      // map["UserID"] = userID;
       await db
           .update("Tbl_User", map, where: "UserID = ?", whereArgs: [userID]);
     } else {
@@ -60,7 +60,6 @@ class MyDatabase {
           StateID1: data[i]["StateID"] as int);
       cityList.add(model);
     }
-    // print("data length : ${data.length}");
     return cityList;
   }
 
@@ -68,13 +67,14 @@ class MyDatabase {
     List<UserModel> userList = [];
     Database db = await initDatabase();
     List<Map<String, Object?>> data =
-        await db.rawQuery("Select * from Tbl_User ");
+        await db.rawQuery("Select * from Tbl_User");
     for (int i = 0; i < data.length; i++) {
       UserModel model = UserModel();
       model.CityID = data[i]["CityID"] as int;
       model.UserID = data[i]["UserID"] as int;
       model.Name = data[i]["Name"].toString();
       model.DOB = data[i]["DOB"].toString();
+      model.isFavouriteUser = false;
       userList.add(model);
     }
     return userList;
@@ -89,6 +89,14 @@ class MyDatabase {
     );
     return deletedid;
   }
+
+  Future<bool> updateIsFavourite(userID,isFavourite) async {
+    Database db = await initDatabase();
+    Map<String, Object?> map = Map();
+    map['IsFavourite'] = !isFavourite;
+    db.update('Tbl_User', map,where: 'UserID = ?', whereArgs: [userID],);
+    return true;
+
+  }
 }
 
-// Future<List<Map<String, Object?>>>
