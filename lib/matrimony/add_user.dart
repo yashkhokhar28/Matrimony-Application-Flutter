@@ -6,6 +6,10 @@ import 'package:matrimony/database/database.dart';
 import 'package:matrimony/model/city_model.dart';
 import 'package:intl/intl.dart';
 import 'package:matrimony/model/user_model.dart';
+import 'dart:convert';
+import 'package:dio/dio.dart';
+import 'package:matrimony/model/user_list_model/user_model.dart';
+import 'package:matrimony/retrofit/rest_client.dart';
 
 class AddUser extends StatefulWidget {
   late UserModel? model;
@@ -65,7 +69,6 @@ class _AddUserState extends State<AddUser> {
     name = TextEditingController(
         text: widget.model != null ? widget.model!.Name.toString() : "");
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -192,8 +195,14 @@ class _AddUserState extends State<AddUser> {
                         if (model.CityID == -1) {
                           showAlertDialog(context);
                         } else {
-                          await MyDatabase().upsertIntoUserTable(cityID: model.CityID,
-                              userName: name.text.toString(), dob: _selectedDate.toString(),userID: widget.model!=null?widget.model!.UserID:-1);
+                          addUser();
+                          // await MyDatabase().upsertIntoUserTable(
+                          //     cityID: model.CityID,
+                          //     userName: name.text.toString(),
+                          //     dob: _selectedDate.toString(),
+                          //     userID: widget.model != null
+                          //         ? widget.model!.UserID
+                          //         : -1);
                         }
                       }
                     });
@@ -209,6 +218,16 @@ class _AddUserState extends State<AddUser> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> addUser() async {
+    final dio = Dio(); // Provide a dio instance
+    final client = RestClient(dio);
+    await client.addUser(name.text, "", model.CityName).then(
+      (value) {
+        print(value.toString());
+      },
     );
   }
 }
