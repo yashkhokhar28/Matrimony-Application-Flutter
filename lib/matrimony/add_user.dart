@@ -190,22 +190,24 @@ class _AddUserState extends State<AddUser> {
                 ),
                 child: TextButton(
                   onPressed: () {
-                    setState(() async {
-                      if (_formKey.currentState!.validate()) {
-                        if (model.CityID == -1) {
-                          showAlertDialog(context);
-                        } else {
-                          addUser();
-                          // await MyDatabase().upsertIntoUserTable(
-                          //     cityID: model.CityID,
-                          //     userName: name.text.toString(),
-                          //     dob: _selectedDate.toString(),
-                          //     userID: widget.model != null
-                          //         ? widget.model!.UserID
-                          //         : -1);
+                    setState(
+                      () async {
+                        if (_formKey.currentState!.validate()) {
+                          if (model.CityID == -1) {
+                            showAlertDialog(context);
+                          } else {
+                            addUser();
+                            // await MyDatabase().upsertIntoUserTable(
+                            //     cityID: model.CityID,
+                            //     userName: name.text.toString(),
+                            //     dob: _selectedDate.toString(),
+                            //     userID: widget.model != null
+                            //         ? widget.model!.UserID
+                            //         : -1);
+                          }
                         }
-                      }
-                    });
+                      },
+                    );
                   },
                   child: Text(
                     "Submit",
